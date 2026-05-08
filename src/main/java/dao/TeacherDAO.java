@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bean.School;
 import bean.Teacher;
 
 public class TeacherDAO extends DAO {
@@ -18,10 +19,13 @@ public class TeacherDAO extends DAO {
 		
 		while (rs.next()) {
 			teacher= new Teacher();
+			School school = new School();
+			
 			teacher.setId(rs.getString("id"));
 			teacher.setPassword(rs.getString("password"));
 			teacher.setName(rs.getString("name"));
-			teacher.setSchool(rs.getString("school_cd"));
+			school.setCd(rs.getString("school_cd"));
+			teacher.setSchool(school);
 		}
 		
 		st.close();
@@ -30,20 +34,7 @@ public class TeacherDAO extends DAO {
 		return teacher;
 	}
 	
-/*
-	public int insert(Customer customer) throws Exception {
-		Connection con = getConnection();
-		
-		PreparedStatement st = con.prepareStatement("insert into customer(login,password) values(?,?)");
-		st.setString(1, customer.getLogin());
-		st.setString(2, customer.getPassword());
-		int line = st.executeUpdate();
-		
-		st.close();
-		con.close();q
-		return line;
-	}
-*/	
+
 
 
 }

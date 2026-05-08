@@ -3,6 +3,7 @@ package gakusei;
 import java.util.List;
 
 import bean.ClassNum;
+import bean.School;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDAO;
@@ -19,7 +20,7 @@ public class StudentUpdateAction extends Action {
 		
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
-		String keyword = teacher.getSchool();
+		School keyword = teacher.getSchool();
 		StudentDAO stdao = new StudentDAO();
 		ClassNumDAO classNumDao = new ClassNumDAO();
 		String no = req.getParameter("no");

@@ -6,16 +6,18 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.ClassNum;
+import bean.School;
 import bean.Student;
 
 public class StudentDAO extends DAO {
-	public List<Student> search(String keyword, String entYear, String classNum, String attend) throws Exception {
+	public List<Student> search(School keyword, String entYear, String classNum, String attend) throws Exception {
 		List<Student> list = new ArrayList<>();
 		Connection con = getConnection();
 		
 		StringBuilder sql = new StringBuilder("select * from students where school_cd = ?");
 		List<Object> params = new ArrayList<>();
-		params.add(keyword);
+		params.add(keyword.getCd());
 		
 		if (entYear != null && !entYear.isEmpty()) {
 			sql.append(" and ent_year = ?");
@@ -47,12 +49,18 @@ public class StudentDAO extends DAO {
 		
 		while (rs.next()) {
 			Student p = new Student();
+			ClassNum classNumBean = new ClassNum();
+			School school = new School();
+			
 			p.setNo(rs.getString("no"));
 			p.setName(rs.getString("name"));
 			p.setEntYear(rs.getInt("ent_Year"));
-			p.setClassNum(rs.getString("class_Num"));
+			classNumBean.setClassNum(rs.getString("class_Num"));
+			classNumBean.setSchool(keyword);
+			p.setClassNum(classNumBean);
 			p.setIsAttend(rs.getBoolean("is_Attend"));
-			//p.setSchool(rs.getString("school_cd"));
+			school.setCd(rs.getString("school_cd"));
+			p.setSchool(school);
 			list.add(p);
 		}
 		
@@ -62,23 +70,30 @@ public class StudentDAO extends DAO {
 		return list;
 	}
 	
-	public List<Student> selectNo(String keyword,String no) throws Exception {
+	public List<Student> selectNo(School keyword,String no) throws Exception {
 		List<Student> stlist = new ArrayList<>();
 		Connection con = getConnection(); 
 		
 		PreparedStatement st = con.prepareStatement("select * from students where school_cd = ? and no = ?");
-		st.setString(1,keyword);
+		st.setString(1, keyword.getCd());
 		st.setString(2, no);
 		
 		ResultSet rs = st.executeQuery();
 		
 		while (rs.next()) {
 			Student s = new Student();
+			ClassNum classNumBean = new ClassNum();
+			School school = new School();
+			
 			s.setNo(rs.getString("no"));
 			s.setName(rs.getString("name"));
 			s.setEntYear(rs.getInt("ent_Year"));
-			s.setClassNum(rs.getString("class_Num"));
+			classNumBean.setClassNum(rs.getString("class_Num"));
+			classNumBean.setSchool(keyword);
+			s.setClassNum(classNumBean);
 			s.setIsAttend(rs.getBoolean("is_Attend"));
+			school.setCd(rs.getString("school_cd"));
+			s.setSchool(school);
 			stlist.add(s);
 		}
 		
@@ -116,9 +131,9 @@ public class StudentDAO extends DAO {
 		st.setString(1, student.getNo());
 		st.setString(2, student.getName());
 		st.setInt(3, student.getEntYear());
-		st.setString(4, student.getClassNum());
+		st.setString(4, student.getClassNum().getClassNum());
 		st.setBoolean(5, student.getIsAttend());
-		st.setString(6, student.getSchool());
+		st.setString(6, student.getSchool().getCd());
 		int line = st.executeUpdate();
 		
 		st.close();
@@ -131,7 +146,7 @@ public class StudentDAO extends DAO {
 		
 		PreparedStatement st = con.prepareStatement("update students set name = ?,class_num = ?,is_attend = ? where no = ?");
 		st.setString(1, student.getName());
-		st.setString(2, student.getClassNum());
+		st.setString(2, student.getClassNum().getClassNum());
 		st.setBoolean(3, student.getIsAttend());
 		st.setString(4, student.getNo());
 		int line = st.executeUpdate();

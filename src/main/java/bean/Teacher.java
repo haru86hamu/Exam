@@ -4,7 +4,7 @@ public class Teacher extends School implements java.io.Serializable {
 	private String id;
 	private String password;
 	private String name; //学生名
-	private String school; //コース番号
+	private School school; //コース番号
 	
 	public String getId() {
 		return id;
@@ -15,7 +15,7 @@ public class Teacher extends School implements java.io.Serializable {
 	public String getName() {
 		return name;
 	}
-	public String getSchool() {
+	public School getSchool() {
 		return school;
 	}
 	
@@ -29,8 +29,8 @@ public class Teacher extends School implements java.io.Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public void setSchool(String school) {
-		this.school= school;
+	public void setSchool(School school) {
+		this.school = school;
 	}
 	
 }

@@ -1,4 +1,7 @@
 package gakusei;
+
+import bean.ClassNum;
+import bean.School;
 import bean.Student;
 import bean.Teacher;
 import dao.StudentDAO;
@@ -14,14 +17,15 @@ public class CreateExecuteAction extends Action {
 		HttpSession session = req.getSession();
 		StudentDAO dao = new StudentDAO();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
-		String keyword = teacher.getSchool();
+		School keyword = teacher.getSchool();
 		int entYear = Integer.parseInt(req.getParameter("year"));
 		String no = req.getParameter("no");
 		String name = req.getParameter("name");
-		String classnum = req.getParameter("classnum");
-		
-		
-		
+
+		ClassNum classnum = new ClassNum();
+		classnum.setSchool(keyword);
+		classnum.setClassNum(req.getParameter("classnum"));
+
 		Student s = new Student();
 		s.setEntYear(entYear);
 		s.setNo(no);
@@ -29,20 +33,19 @@ public class CreateExecuteAction extends Action {
 		s.setClassNum(classnum);
 		s.setSchool(keyword);
 		s.setIsAttend(true);
-		
+
 		int st = dao.searchNo(no);
-		if (st < 0) {
-			String stmassege = "学生番号が重複しています";
-			req.setAttribute("stmassege",stmassege);
+		if (st > 0) {
+			req.setAttribute("stmessage", "学生番号が重複しています");
 			req.getRequestDispatcher("StudentCreate.action").forward(req, resp);
+			return;
 		}
-		
+
 		int line = dao.insert(s);
 		if (line > 0) {
 			req.getRequestDispatcher("studentcreate_done.jsp").forward(req, resp);
-		}else {
-			String massege = "登録できませんでした";
-			req.setAttribute("massege",massege);
+		} else {
+			req.setAttribute("message", "登録できませんでした");
 			req.getRequestDispatcher("StudentCreate.action").forward(req, resp);
 		}
 	}

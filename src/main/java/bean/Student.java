@@ -4,9 +4,9 @@ public class Student extends School  implements java.io.Serializable {
 	private String no; //学生名
 	private String name; //コース番号
 	private int entYear;
-	private String classNum;
+	private ClassNum classNum;
 	private boolean isAttend;
-	private String school;
+	private School school;
 	
 	public String getNo() {
 		return no;
@@ -17,13 +17,13 @@ public class Student extends School  implements java.io.Serializable {
 	public int getEntYear() {
 		return entYear;
 	}
-	public String getClassNum() {
+	public ClassNum getClassNum() {
 		return classNum;
 	}
 	public boolean getIsAttend() {
 		return isAttend;
 	}
-	public String getSchool() {
+	public School getSchool() {
 		return school;
 	}
 	
@@ -37,13 +37,13 @@ public class Student extends School  implements java.io.Serializable {
 	public void setEntYear(int entYear) {
 		this.entYear = entYear;
 	}
-	public void setClassNum(String classNum) {
-		this.classNum = classNum;
+	public void setClassNum(ClassNum classnum) {
+		this.classNum = classnum;
 	}
 	public void setIsAttend(boolean isAttend) {
 		this.isAttend = isAttend;	
 	}
-	public void setSchool(String school) {
+	public void setSchool(School school) {
 		this.school= school;
 	}
 

@@ -1,5 +1,6 @@
 package gakusei;
 
+import bean.ClassNum;
 import bean.Student;
 import dao.StudentDAO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,15 +21,18 @@ public class UpdateExecuteAction extends Action {
 		String class_num = request.getParameter("class_num");
 		String isAttendStr = request.getParameter("is_attend");
 
+		ClassNum classnum = new ClassNum();
+		classnum.setClassNum(class_num);
+
 		if (isAttendStr != null) {
 			isAttend = true;
 		}
 		student.setNo(no);
 		student.setName(name);
 		student.setEntYear(ent_year);
-		student.setClassNum(class_num);
+		student.setClassNum(classnum);
 		student.setIsAttend(isAttend);
-		
+
 		studentdao.update(student);
 
 		request.getRequestDispatcher("studentupdate_done.jsp").forward(request, response);

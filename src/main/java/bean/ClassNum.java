@@ -1,21 +1,21 @@
 package bean;
 
 public class ClassNum extends School implements java.io.Serializable {
-	private String school; //学校コード
-	private String ClassNum; //クラス番号
+	private School school; //学校コード
+	private String classnum; //クラス番号
 	
-	public String getSchool() {
+	public School getSchool() {
 		return school;
 	}
 	public String getClassNum() {
-		return ClassNum;
+		return classnum;
 	}
 	
-	public void setSchool(String school) {
+	public void setSchool(School school) {
 		this.school= school;
 	}
-	public void setClassNum(String ClassNum) {
-		this.ClassNum = ClassNum;
+	public void setClassNum(String classnum) {
+		this.classnum = classnum;
 	}
 
 }

@@ -8,7 +8,7 @@
 	</ul>
 	<ul class="no-bullet">
 	  <li>成績管理</li>
-	  <li><a href="../test/TestList.action">成績登録</a></li>
+	  <li><a href="../test/TestCreate.action">成績登録</a></li>
 	  <li><a href="">成績参照</a></li>
 	</ul>
 	<ul class="no-bullet">

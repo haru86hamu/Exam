@@ -3,6 +3,7 @@ package gakusei;
 import java.util.List;
 
 import bean.ClassNum;
+import bean.School;
 import bean.Teacher;
 import dao.ClassNumDAO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ public class StudentCreateAction extends Action {
 		HttpSession session = req.getSession();
 		ClassNumDAO classdao = new ClassNumDAO();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
-		String keyword = teacher.getSchool();
+		School keyword = teacher.getSchool();
 		List<ClassNum> classlist = classdao.get(keyword);
 		
 		req.setAttribute("classlist",classlist);

@@ -12,7 +12,7 @@
 </div>
 
 
-<form class="search" method="get" action="testCreate.action">
+<form class="search" method="get" action="TestCreate.action">
 	<label for="year" class="lab">入学年度
 		<select name="year" id="year" class="label">
 			<option value="">--------</option>
@@ -41,15 +41,15 @@
 	<label class="lab">科目
 		<select name="subject" id="subject" class="label">
 		<option value="">------</option>
-		<c:forEach var="subject" items="${subject }">
-			<option value="${subject.subject }" ${subject == 'subject.subject' ? 'selected' : ''}>${subject.subject }</option>
+		<c:forEach var="subjectItem" items="${subjects}">
+			<option value="${subjectItem.cd}" ${param.subject == subjectItem.cd ? 'selected' : ''}>${subjectItem.name}</option>
 		</c:forEach>
 		</select>
 	</label>
 	
 	<label class="lab">回数
-		<select name="subject" id="subject" class="label">
-		<option value="1"${subject == '1' ? 'selected' : ''}>1</option>
+		<select name="count" id="count" class="label">
+		<option value="1"${count == '1' ? 'selected' : ''}>1</option>
 		</select>
 	</label>
 
@@ -57,20 +57,22 @@
 </form>
 
 <c:choose>
+	<c:when test="${param.subject == null || param.subject == '' || param.subject == '------'}">
+	</c:when>
 	<c:when test="${list != null && list.size() > 0}">
 		<div>検索結果: ${list.size()}件</div>
-		<table class="table" border="1">
-			<thead>
-				<tr>
-					<th>入学年度</th>
-					<th>学生番号</th>
-					<th>氏名</th>
-					<th>クラス</th>
-					<th>点数</th>
-				</tr>
-			</thead>
-			<tbody>
-				<form action="testUpdate.action" method="post">
+		<form action="testCreateExecute.action" method="post">
+			<table class="table" border="1">
+				<thead>
+					<tr>
+						<th>入学年度</th>
+						<th>学生番号</th>
+						<th>氏名</th>
+						<th>クラス</th>
+						<th>点数</th>
+					</tr>
+				</thead>
+				<tbody>
 					<c:forEach var="student" items="${list}">
 						<tr>
 							<td>${student.entYear}</td>
@@ -78,13 +80,22 @@
 							<td>${student.name}</td>
 							<td>${student.classNum}</td>
 							<td>
-								<input type="number" min="1" max="100" required> 
+								<input type="score" min="0" max="100">
+								<c:if test="${message != null}">
+									<div>${message}</div>
+								</c:if>
+							</td>
+							<td>
+								<input type="hidden" name="count" value="${count }">
+								<input type="hidden" name="subject" value="${param.subject}">
 							</td>
 						</tr>
 					</c:forEach>
-				</form>
-			</tbody>
-		</table>
+					</tbody>
+				</table>
+				<br>
+			<button type="submit">登録して終了</button>
+		</form>
 	</c:when>
 </c:choose>
 
