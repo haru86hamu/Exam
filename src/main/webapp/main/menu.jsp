@@ -8,7 +8,11 @@
 	</ul>
 	<ul class="no-bullet">
 	  <li>成績管理</li>
+<<<<<<< HEAD
 	  <li><a href="../test/TestList.action">成績登録</a></li>
+=======
+	  <li><a href="../test/TestCreate.action">成績登録</a></li>
+>>>>>>> branch 'master' of https://github.com/haru86hamu/Exam.git
 	  <li><a href="">成績参照</a></li>
 	</ul>
 	<ul class="no-bullet">

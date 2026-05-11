@@ -6,6 +6,7 @@ public class TestListSubject implements java.io.Serializable {
 	private int entYear;
 	private String studentNo;
 	private String studentName;
+<<<<<<< HEAD
 	private String classNum;
 	private Map<Integer,Integer> points;
 	
@@ -44,6 +45,46 @@ public class TestListSubject implements java.io.Serializable {
 		this.studentName = studentName;
 	}
 	public void setClassNum(String classNum) {
+=======
+	private ClassNum classNum;
+	private Map<Integer,Integer> points;
+	
+	public int getEntYear() {
+		return entYear;
+	}
+	public String getStudentNo() {
+		return studentNo;
+	}
+	public String getStudentName() {
+		return studentName;
+	}
+	public ClassNum getClassNum() {
+		return classNum;
+	}
+	public Map<Integer,Integer> getPoints() {
+		return points;
+	}
+	public String getPoint(int key) {
+	    if (points == null) {
+	        return null;
+	    }
+	    Integer value = points.get(key);
+	    return value != null ? value.toString() : null;
+	}
+
+	
+	
+	public void setEntYear(int entYear) {
+		this.entYear = entYear;
+	}
+	public void setStudentNo(String studentNo) {
+		this.studentNo = studentNo;
+	}
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
+	}
+	public void setClassNum(ClassNum classNum) {
+>>>>>>> branch 'master' of https://github.com/haru86hamu/Exam.git
 		this.classNum = classNum;
 	}
 	public void setPoints(Map<Integer,Integer> points) {

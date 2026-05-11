@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
             
     
     <wb-module deploy-name="score_management">
@@ -19,4 +20,12 @@
     </wb-module>
         
 
+=======
+    <wb-module deploy-name="score_management">
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <property name="context-root" value="score_management"/>
+        <property name="java-output-path" value="/score_management/build/classes"/>
+    </wb-module>
+>>>>>>> branch 'master' of https://github.com/haru86hamu/Exam.git
 </project-modules>

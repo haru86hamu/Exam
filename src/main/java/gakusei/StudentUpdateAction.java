@@ -3,6 +3,7 @@ package gakusei;
 import java.util.List;
 
 import bean.ClassNum;
+<<<<<<< HEAD
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDAO;
@@ -20,6 +21,26 @@ public class StudentUpdateAction extends Action {
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
 		String keyword = teacher.getSchool();
+=======
+import bean.School;
+import bean.Student;
+import bean.Teacher;
+import dao.ClassNumDAO;
+import dao.StudentDAO;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import tool.Action;
+
+public class StudentUpdateAction extends Action {
+
+	public void execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		
+		
+		HttpSession session = req.getSession();
+		Teacher teacher = (Teacher) session.getAttribute("teacher");
+		School keyword = teacher.getSchool();
+>>>>>>> branch 'master' of https://github.com/haru86hamu/Exam.git
 		StudentDAO stdao = new StudentDAO();
 		ClassNumDAO classNumDao = new ClassNumDAO();
 		String no = req.getParameter("no");
