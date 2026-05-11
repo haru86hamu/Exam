@@ -3,7 +3,6 @@
 
 <%@include file="../header.jsp" %>
 
-<<<<<<< HEAD
 <div class="inner-header">
 	<div class="inner">
 		<div class="header-title">学生管理</div>
@@ -40,45 +39,6 @@
 			</tbody>
 	</c:when>
 </c:choose>
-=======
-
-<div class="inner-header">
-	<div class="inner">
-		<div class="header-title">学生管理</div>
-		<div class="inner-nav"></div>
-	</div>
-</div>
-
-<div class="touroku"><a href="SubjectCreate.action">新規登録</a></div>
-
-
-<table class="table" border="1">
-	<thead>
-		<tr>
-			<th>科目コード</th>
-			<th>科目名</th>
-			<th></th>
-			<th></th>
-		</tr>
-	</thead>
-	<c:choose>
-		<c:when test="${list != null && list.size() > 0}">
-			<tbody>
-				<c:forEach var="subject" items="${list}">
-					<tr>
-						<td>${subject.cd}</td>
-						<td>${subject.name}</td>
-						<td>
-							<a href="">変更</a>
-						</td>
-						<td>
-							<a href="">削除</a>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</c:when>
-	</c:choose>
->>>>>>> branch 'master' of https://github.com/haru86hamu/Exam.git
 </table>
 
 <%@include file="../footer.jsp" %>
