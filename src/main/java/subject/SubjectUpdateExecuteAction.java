@@ -1,5 +1,6 @@
 package subject;
 
+import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import dao.SubjectDAO;
@@ -15,7 +16,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		HttpSession session = request.getSession();
 		SubjectDAO dao = new SubjectDAO();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
-		String school = teacher.getSchool();
+		School keyword = teacher.getSchool();
 
 		String cd = request.getParameter("cd");     
 		String name = request.getParameter("name"); 
@@ -23,7 +24,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		Subject subject = new Subject();
 		subject.setCd(cd);
 		subject.setName(name);
-		subject.setSchool(school);
+		subject.setSchool(keyword);
 
 
 		int line = dao.update(subject);
