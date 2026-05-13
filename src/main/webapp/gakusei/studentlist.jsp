@@ -66,7 +66,7 @@
 						<td>${student.entYear}</td>
 						<td>${student.no}</td>
 						<td>${student.name}</td>
-						<td>${student.classNum}</td>
+						<td>${student.classNum.classNum}</td>
 						<td>
 							<c:choose>
 								<c:when test="${student.isAttend}">○</c:when>

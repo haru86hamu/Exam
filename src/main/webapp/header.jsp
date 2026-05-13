@@ -157,7 +157,7 @@
 					<dt>
 						成績管理
 						<dd>
-							<a href="../test/TestList.action">成績登録</a>
+							<a href="../test/TestCreate.action">成績登録</a>
 						</dd>
 						<dd>
 							<a href="../main/Menu.action">成績参照</a>

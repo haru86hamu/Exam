@@ -3,7 +3,6 @@
 
 <%@include file="../header.jsp" %>
 
-
 <div class="inner-header">
 	<div class="inner">
 		<div class="header-title">成績管理</div>
@@ -11,11 +10,10 @@
 	</div>
 </div>
 
-
 <form class="search" method="get" action="TestCreate.action">
 	<label for="year" class="lab">入学年度
-		<select name="year" id="year" class="label">
-			<option value="">--------</option>
+		<select name="year" id="year" class="label" required>
+			<option value="" ${year == '' ? 'selected' : ''}>--------</option>
 			<option value="2017" ${year == '2017' ? 'selected' : ''}>2017</option>
 			<option value="2018" ${year == '2018' ? 'selected' : ''}>2018</option>
 			<option value="2019" ${year == '2019' ? 'selected' : ''}>2019</option>
@@ -30,26 +28,28 @@
 	</label>
 
 	<label for="classnum" class="lab">クラス
-		<select name="classnum" id="classnum" class="label">
-			<option value="">-------</option>
+		<select name="classnum" id="classnum" class="label" required>
+			<option value=""${classnum == '' ? 'selected' : ''}>-------</option>
 			<c:forEach var="c" items="${classlist}">
 				<option value="${c.classNum}" ${classnum == c.classNum ? 'selected' : ''}>${c.classNum}</option>
 			</c:forEach>
 		</select>
 	</label>
-	
+
 	<label class="lab">科目
-		<select name="subject" id="subject" class="label">
-		<option value="">------</option>
-		<c:forEach var="subjectItem" items="${subjects}">
-			<option value="${subjectItem.cd}" ${param.subject == subjectItem.cd ? 'selected' : ''}>${subjectItem.name}</option>
-		</c:forEach>
+		<select name="subject" id="subject" class="label" required>
+			<option value=""${param.subject == '' ? 'selected' : ''}>------</option>
+			<c:forEach var="subjectItem" items="${subjects}">
+				<option value="${subjectItem.cd}" ${param.subject == subjectItem.cd ? 'selected' : ''}>${subjectItem.name}</option>
+			</c:forEach>
 		</select>
 	</label>
-	
+
 	<label class="lab">回数
-		<select name="count" id="count" class="label">
-		<option value="1"${count == '1' ? 'selected' : ''}>1</option>
+		<select name="count" id="count" class="label" required>
+			<option value=""${count == '' ? 'selected' : ''}>-----</option>
+			<option value="1" ${count == '1' ? 'selected' : ''}>1</option>
+			<option value="2" ${count == '2' ? 'selected' : ''}>2</option>
 		</select>
 	</label>
 
@@ -78,22 +78,21 @@
 							<td>${student.entYear}</td>
 							<td>${student.no}</td>
 							<td>${student.name}</td>
-							<td>${student.classNum}</td>
+							<td>${student.classNum.classNum}</td>
 							<td>
-								<input type="score" min="0" max="100">
-								<c:if test="${message != null}">
-									<div>${message}</div>
+								<c:if test="${score != null}">
+									<input type="score" min="0" max="100">
 								</c:if>
 							</td>
 							<td>
-								<input type="hidden" name="count" value="${count }">
+								<input type="hidden" name="count" value="${count}">
 								<input type="hidden" name="subject" value="${param.subject}">
 							</td>
 						</tr>
 					</c:forEach>
-					</tbody>
-				</table>
-				<br>
+				</tbody>
+			</table>
+			<br>
 			<button type="submit">登録して終了</button>
 		</form>
 	</c:when>

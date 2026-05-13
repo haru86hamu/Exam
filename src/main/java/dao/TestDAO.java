@@ -2,11 +2,42 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
+import bean.Student;
 import bean.Test;
 
 public class TestDAO extends DAO {
+	
+	@SuppressWarnings("unused")
+	public List<Test> get(int no) throws Exception {
+		Connection con  = getConnection();
+		List<Test> No = new ArrayList<>();
+		
+		PreparedStatement st = con.prepareStatement("select * from test where Student_no = ?");
+		st.setInt(1,no);
+
+		ResultSet rs = st.executeQuery();
+		
+		while(rs.next()) {
+			Test t = new Test();
+			Student student = new Student();
+			student.setCd(rs.getString("no"));
+			t.setSchool(student);
+			No.add(t);
+		}
+		
+		
+		if (No != null) {
+			
+			return No;
+		}
+		
+		return No;
+		
+	}
 	
 	public boolean insert(List<Test> test ,String keyword) throws Exception {
 		Connection con  = getConnection();

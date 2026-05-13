@@ -7,9 +7,11 @@ import bean.School;
 import bean.Student;
 import bean.Subject;
 import bean.Teacher;
+import bean.Test;
 import dao.ClassNumDAO;
 import dao.StudentDAO;
 import dao.SubjectDAO;
+import dao.TestDAO;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -25,12 +27,19 @@ public class TestCreateAction extends Action {
 		StudentDAO dao = new StudentDAO();
 		ClassNumDAO classdao = new ClassNumDAO();
 		SubjectDAO sub = new SubjectDAO();
+		TestDAO testdao  = new TestDAO();
+		
 		String entYear = req.getParameter("year");
 		String classnum = req.getParameter("classnum");
 		String attend = req.getParameter("attend");
+		
 		List<Student> list = dao.search(keyword, entYear, classnum, attend);
 		List<ClassNum> classlist = classdao.get(keyword);
 		List<Subject> subjects = sub.search(keyword);
+		
+		int st = dao.searchNo(no);
+		List<Test> test = testdao.get(st);
+		
 		req.setAttribute("classlist",classlist);
 		req.setAttribute("list", list);
 		req.setAttribute("subjects", subjects);

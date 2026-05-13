@@ -22,7 +22,7 @@ public class CreateExecuteAction extends Action {
 		List<Test> list = new ArrayList<>();
 		TestDAO dao = new TestDAO();
 		Test test = new Test();
-		int entYear = Integer.parseInt(req.getParameter("year"));
+		
 		String no = req.getParameter("no");
 		String name = req.getParameter("name");
 		String classnum = req.getParameter("classnum");
@@ -31,15 +31,7 @@ public class CreateExecuteAction extends Action {
 		String subject = req.getParameter("subject");
 		
 		
-		/*
-		int line = dao.insert(,keyword);
-		if (line > 0) {
-			req.getRequestDispatcher("").forward(req, resp);
-		}else {
-			String massege = "0∼100の範囲で入力して下さい";
-			req.setAttribute("massege",massege);
-			req.getRequestDispatcher("TestCreate.action").forward(req, resp);
-		}*/
+		
 	}
 
 }

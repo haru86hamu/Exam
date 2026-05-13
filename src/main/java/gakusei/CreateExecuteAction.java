@@ -1,6 +1,5 @@
 package gakusei;
 
-
 import bean.ClassNum;
 import bean.School;
 import bean.Student;

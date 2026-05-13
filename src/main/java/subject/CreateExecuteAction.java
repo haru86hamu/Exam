@@ -1,4 +1,5 @@
 package subject;
+
 import bean.School;
 import bean.Subject;
 import bean.Teacher;
@@ -16,23 +17,23 @@ public class CreateExecuteAction extends Action {
 		SubjectDAO dao = new SubjectDAO();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
 		School school = teacher.getSchool();
-		
+
 		String cd = req.getParameter("cd");
 		String name = req.getParameter("name");
-		
+
 		Subject s = new Subject();
+		s.setSchool(school);
 		s.setCd(cd);
 		s.setName(name);
-		s.setSchool(school);
-		
+
 		Subject ex = dao.get(cd, school);
 		if (ex != null) {
 			String stmessage = "科目コードが重複しています";
-			req.setAttribute("stmassage", stmessage);
+			req.setAttribute("message", stmessage);
 			req.getRequestDispatcher("SubjectCreate.action").forward(req, resp);
-			return; 
+			return;
 		}
-		
+
 		int line = dao.insert(s);
 		if (line > 0) {
 			req.getRequestDispatcher("subjectcreate_done.jsp").forward(req, resp);
@@ -43,4 +44,3 @@ public class CreateExecuteAction extends Action {
 		}
 	}
 }
-

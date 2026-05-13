@@ -5,12 +5,12 @@
 
 <div class="inner-header">
 	<div class="inner">
-		<div class="header-title">学生管理</div>
+		<div class="header-title">科目管理</div>
 		<div class="inner-nav"></div>
 	</div>
 </div>
 
-<div class="touroku"><a href="CreateExecute.action">新規登録</a></div>
+<div class="touroku"><a href="SubjectCreate.action">新規登録</a></div>
 <table class="table" border="1">
 			<thead>
 				<tr>
@@ -29,10 +29,10 @@
 						<td>${subject.cd}</td>
 						<td>${subject.name}</td>
 						<td>
-							<a href="SubjectUpdateExecute.Action">変更</a>
+							<a href="SubjectUpdate.action?cd=${subject.cd }">変更</a>
 						</td>
 						<td>
-							<a href="">削除</a>
+							<a href="SubjectDelete.action?cd=${subject.cd }">削除</a>
 						</td>
 					</tr>
 				</c:forEach>

@@ -3,10 +3,9 @@
 
 <%@include file="../header.jsp" %>
 
-
 <div class="inner-header">
 	<div class="inner">
-		<div class="header-title">学生管理</div>
+		<div class="header-title">学生登録</div>
 		<div class="inner-nav"></div>
 	</div>
 </div>
@@ -21,7 +20,7 @@
 
 <form action="CreateExecute.action" method="post">
 	<label for="year" class="lab">入学年度
-		<select name="year" id="year" required="required" class="">
+		<select name="year" id="year" required="required">
 			<option value="">--------</option>
 			<option value="2017">2017</option>
 			<option value="2018">2018</option>
@@ -35,24 +34,26 @@
 			<option value="2026">2026</option>
 		</select>
 	</label>
-	
+
 	<label class="lab">学生番号
-		<input type="text" name="no" value="${no }" required maxlength="7" class="">
+		<input type="text" name="no" value="${no}" required maxlength="7">
 	</label>
-	
+
 	<label class="lab">氏名
-		<input type="text" name="name" value="${name }" required class="">
+		<input type="text" name="name" value="${name}" required>
 	</label>
-	
+
 	<label for="classnum" class="lab">クラス
-		<select name="classnum" id="classnum" class="">
+		<select name="classnum" id="classnum">
 			<c:forEach var="c" items="${classlist}">
 				<option value="${c.classNum}" ${classnum == c.classNum ? 'selected' : ''}>${c.classNum}</option>
 			</c:forEach>
 		</select>
 	</label>
-	
+
 	<button type="submit">登録して終了</button>
 </form>
 
 <a href="StudentList.action">戻る</a>
+
+<%@include file="../footer.jsp" %>

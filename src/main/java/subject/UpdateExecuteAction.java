@@ -9,16 +9,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import tool.Action;
 
-public class SubjectUpdateExecuteAction extends Action {
+public class UpdateExecuteAction extends Action {
 
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		HttpSession session = request.getSession();
-		SubjectDAO dao = new SubjectDAO();
 		Teacher teacher = (Teacher) session.getAttribute("teacher");
 		School keyword = teacher.getSchool();
 
-		String cd = request.getParameter("cd");     
+		String cd = request.getParameter("cd");
 		String name = request.getParameter("name"); 
 
 		Subject subject = new Subject();
@@ -26,7 +25,7 @@ public class SubjectUpdateExecuteAction extends Action {
 		subject.setName(name);
 		subject.setSchool(keyword);
 
-
+		SubjectDAO dao = new SubjectDAO();
 		int line = dao.update(subject);
 
 		if (line > 0) {
