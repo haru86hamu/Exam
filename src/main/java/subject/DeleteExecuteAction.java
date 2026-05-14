@@ -11,22 +11,22 @@ import tool.Action;
 
 public class DeleteExecuteAction extends Action {
 
+	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws Exception {
-
-		HttpSession session = req.getSession();
-		Teacher teacher = (Teacher) session.getAttribute("teacher");
-		School school = teacher.getSchool();
-
-		String cd = req.getParameter("cd");
-		String name = req.getParameter("name");
+		// TODO 自動生成されたメソッド・スタブ
 		
+		HttpSession session = req.getSession(); 
+		Teacher teacher = (Teacher)session.getAttribute("user");
+		School keyword = teacher.getSchool();
 		Subject subject = new Subject();
-		subject.setSchool(school);
-		subject.setCd(cd);
-		subject.setName(name);
+		SubjectDAO subjectDAO = new SubjectDAO ();
 		
-		SubjectDAO dao = new SubjectDAO();
-		int line = dao.delete(subject);
+		String cd = req.getParameter("cd");
+		
+		subject.setCd(cd);
+		subject.setSchool(keyword);
+		
+		int line = subjectDAO.delete(subject);
 		
 		if (line > 0) {
 			req.getRequestDispatcher("subjectdelete_done.jsp").forward(req, resp);
@@ -34,5 +34,7 @@ public class DeleteExecuteAction extends Action {
 			req.setAttribute("massege", "更新に失敗しました");
 			req.getRequestDispatcher("SubjectDelete.action").forward(req, resp);
 		}
+		
 	}
+
 }
