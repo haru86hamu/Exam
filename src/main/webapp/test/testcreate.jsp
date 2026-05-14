@@ -5,10 +5,13 @@
 
 <div class="inner-header">
 	<div class="inner">
-		<div class="header-title">成績管理</div>
+		<div class="header-title">成績登録</div>
 		<div class="inner-nav"></div>
 	</div>
 </div>
+<c:if test="${not empty message}">
+	<div class="error">${message}</div>
+</c:if>
 
 <form class="search" method="get" action="TestCreate.action">
 	<label for="year" class="lab">入学年度
@@ -38,9 +41,9 @@
 
 	<label class="lab">科目
 		<select name="subject" id="subject" class="label" required>
-			<option value=""${param.subject == '' ? 'selected' : ''}>------</option>
+			<option value=""${subject == '' ? 'selected' : ''}>------</option>
 			<c:forEach var="subjectItem" items="${subjects}">
-				<option value="${subjectItem.cd}" ${param.subject == subjectItem.cd ? 'selected' : ''}>${subjectItem.name}</option>
+				<option value="${subjectItem.cd}" ${subject == subjectItem.cd ? 'selected' : ''}>${subjectItem.name}</option>
 			</c:forEach>
 		</select>
 	</label>
@@ -57,11 +60,16 @@
 </form>
 
 <c:choose>
-	<c:when test="${param.subject == null || param.subject == '' || param.subject == '------'}">
+	<c:when test="${subject == null || subject == '' || subject == '------'}">
 	</c:when>
 	<c:when test="${list != null && list.size() > 0}">
 		<div>検索結果: ${list.size()}件</div>
-		<form action="testCreateExecute.action" method="post">
+		<form action="CreateExecute.action" method="post">
+			<input type="hidden" name="year" value="${year}">
+			<input type="hidden" name="classnum" value="${classnum}">
+			<input type="hidden" name="attend" value="${attend}">
+			<input type="hidden" name="count" value="${count}">
+			<input type="hidden" name="subject" value="${subject}">
 			<table class="table" border="1">
 				<thead>
 					<tr>
@@ -80,13 +88,9 @@
 							<td>${student.name}</td>
 							<td>${student.classNum.classNum}</td>
 							<td>
-								<c:if test="${score != null}">
-									<input type="score" min="0" max="100">
-								</c:if>
-							</td>
-							<td>
-								<input type="hidden" name="count" value="${count}">
-								<input type="hidden" name="subject" value="${param.subject}">
+								<input type="hidden" name="studentNo" value="${student.no}">
+								<input type="hidden" name="classNum" value="${student.classNum.classNum}">
+								<input type="number" name="point" value="${pointMap[student.no] != null ? pointMap[student.no] : 0}" min="0" max="100" required>
 							</td>
 						</tr>
 					</c:forEach>
