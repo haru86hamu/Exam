@@ -18,5 +18,4 @@ public class ClassNum extends School implements java.io.Serializable {
 	public void setClassNum(String classnum) {
 		this.classnum = classnum;
 	}
-
 }

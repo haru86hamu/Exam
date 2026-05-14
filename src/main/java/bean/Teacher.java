@@ -33,5 +33,4 @@ public class Teacher extends School implements java.io.Serializable {
 	public void setSchool(School school) {
 		this.school = school;
 	}
-	
-}
+}	

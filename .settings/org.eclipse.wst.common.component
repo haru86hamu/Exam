@@ -2,7 +2,11 @@
     <wb-module deploy-name="score_management">
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
         <property name="context-root" value="score_management"/>
+=======
+        <property name="context-root" value="sample_(2)"/>
+>>>>>>> branch 'master' of https://github.com/haru86hamu/Exam.git
         <property name="java-output-path" value="/score_management/build/classes"/>
     </wb-module>
 </project-modules>
