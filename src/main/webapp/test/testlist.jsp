@@ -5,12 +5,13 @@
 
 <div class="inner-header">
 	<div class="inner">
-		<div class="header-title">成績登録</div>
+		<div class="header-title">成績参照</div>
 		<div class="inner-nav"></div>
 	</div>
 </div>
 
-<form class="search" method="get" action="TestCreate.action">
+<form class="search" method="get" action="TestListSubject.action">
+	<p style="margin-right: auto;">科目情報</p>
 	<label for="year" class="lab">入学年度
 		<select name="year" id="year" class="label" required>
 			<option value="" ${year == '' ? 'selected' : ''}>--------</option>
@@ -45,62 +46,85 @@
 		</select>
 	</label>
 
-	<label class="lab">回数
-		<select name="count" id="count" class="label" required>
-			<option value=""${count == '' ? 'selected' : ''}>-----</option>
-			<option value="1" ${count == '1' ? 'selected' : ''}>1</option>
-			<option value="2" ${count == '2' ? 'selected' : ''}>2</option>
-		</select>
+	<button type="submit">検索</button>
+</form>
+<form class="search" method="get" action="TestListStudent.action">
+	<p style="margin-right: auto;">学生情報</p>
+	<label class="lab" style="margin-right: auto;">学生番号
+		<input type="text" class="label" name="no" value="${no}" required maxlength="7">
 	</label>
 
 	<button type="submit">検索</button>
 </form>
 
-
 <c:if test="${not empty message}">
 	<div class="error">${message}</div>
 </c:if>
 
+		
 <c:choose>
-	<c:when test="${subject == null || subject == '' || subject == '------'}">
+	<c:when test="${empty testlist && empty stlist}">
+		<label class="lab"><p>科目情報を選択または学生情報を入力して検索ボタンをクリックして下さい</p></label>
 	</c:when>
-	<c:when test="${list != null && list.size() > 0}">
-		<div>検索結果: ${list.size()}件</div>
-		<form action="CreateExecute.action" method="post">
-			<input type="hidden" name="year" value="${year}">
-			<input type="hidden" name="classnum" value="${classnum}">
-			<input type="hidden" name="attend" value="${attend}">
-			<input type="hidden" name="count" value="${count}">
-			<input type="hidden" name="subject" value="${subject}">
-			<table class="table" border="1">
-				<thead>
+	<c:when test="${not empty testlist}">
+		<div>科目:${subname }</div>
+		<table class="table" border="1">
+			<thead>
+				<tr>
+					<th>入学年度</th>
+					<th>クラス</th>
+					<th>学生番号</th>
+					<th>氏名</th>
+					<th>1回目</th>
+					<th>2回目</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="test" items="${testlist}">
 					<tr>
-						<th>入学年度</th>
-						<th>学生番号</th>
-						<th>氏名</th>
-						<th>クラス</th>
-						<th>点数</th>
+						<td>${test.entYear}</td>
+						<td>${test.classNum.classNum}</td>
+						<td>${test.studentNo}</td>
+						<td>${test.studentName}</td>
+						<td>
+							<c:choose>
+								<c:when test="${test.getPoint(1) != null}">${test.getPoint(1)}</c:when>
+								<c:when test="${test.getPoint(1) == null}">-</c:when>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${test.getPoint(2) != null}">${test.getPoint(2)}</c:when>
+								<c:when test="${test.getPoint(2) == null}">-</c:when>
+							</c:choose>
+						</td>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="student" items="${list}">
-						<tr>
-							<td>${student.entYear}</td>
-							<td>${student.no}</td>
-							<td>${student.name}</td>
-							<td>${student.classNum.classNum}</td>
-							<td>
-								<input type="hidden" name="studentNo" value="${student.no}">
-								<input type="hidden" name="classNum" value="${student.classNum.classNum}">
-								<input type="number" name="point" value="${pointMap[student.no] != null ? pointMap[student.no] : 0}" min="0" max="100" required>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<br>
-			<button type="submit">登録して終了</button>
-		</form>
+				</c:forEach>
+			</tbody>
+		</table>
+	</c:when>
+	<c:when test="${not empty stlist}">
+		<div>氏名:${name }(${no })</div>
+		<table class="table" border="1">
+			<thead>
+				<tr>
+					<th>科目名</th>
+					<th>科目コード</th>
+					<th>回数</th>
+					<th>点数</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="st" items="${stlist}">
+					<tr>
+						<td>${st.subjectName }</td>
+						<td>${st.subjectCd }</td>
+						<td>${st.num }</td>
+						<td>${st.point }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</c:when>
 </c:choose>
 

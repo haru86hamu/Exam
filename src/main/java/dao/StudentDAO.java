@@ -156,5 +156,41 @@ public class StudentDAO extends DAO {
 		
 		return line;
 	}
+	
+	public List<Student> selectstudent(School keyword,int entYear,String classnum) throws Exception {
+		Connection con = getConnection();
+		List<Student> studentno = new ArrayList<>();
+		
+		PreparedStatement st = con.prepareStatement("select * from students where school_cd = ? and class_num = ? and ent_year = ?");
+		st.setString(1, keyword.getCd());
+		st.setString(2, classnum);
+		st.setInt(3, entYear);
+		
+		ResultSet rs = st.executeQuery();
+		
+		while (rs.next()) {
+			Student s = new Student();
+			s.setNo(rs.getString("no"));
+			studentno.add(s);
+		}
+		return studentno;
+		
+	}
+
+	public String searchName(School keyword,String student_no) throws Exception {
+		Connection con = getConnection();
+		
+		PreparedStatement st = con.prepareStatement("select name from students where school_cd = ? and no = ?");
+		st.setString(1, keyword.getCd());
+		st.setString(2, student_no);
+		
+		ResultSet rs = st.executeQuery();
+		
+		String name = null;
+		if (rs.next()) {
+			name = rs.getString("name");
+		}
+		return name;
+	}
 
 }
