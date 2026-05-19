@@ -57,14 +57,16 @@
 	<button type="submit">検索</button>
 </form>
 
-<c:if test="${not empty message}">
-	<div class="error">${message}</div>
-</c:if>
 
 		
 <c:choose>
 	<c:when test="${empty testlist && empty stlist}">
 		<label class="lab"><p>科目情報を選択または学生情報を入力して検索ボタンをクリックして下さい</p></label>
+		
+		<c:if test="${not empty message}">
+			<div class="error">${message}</div>
+		</c:if>
+		
 	</c:when>
 	<c:when test="${not empty testlist}">
 		<div>科目:${subname }</div>

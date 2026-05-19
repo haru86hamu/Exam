@@ -41,12 +41,14 @@ public class TestListSubjectAction extends Action {
 		List<Student> studentno = dao.selectstudent(keyword,entYear,classnum);
 		List<TestListSubject> testlist = testsubdao.selectsubject(keyword,entYear,classnum,subject,studentno);
 		
-		
-		
-		String message = (String) req.getAttribute("message");
-		if (message != null) {
-			req.setAttribute("message", message);
+		if (testlist != null) {
+			String message = "登録された学生が見つかりませんでした";
+			if (message != null) {
+				req.setAttribute("message", message);
+			}
 		}
+		
+		
 		
 		req.setAttribute("year", entYear);
 		req.setAttribute("classnum", classnum);

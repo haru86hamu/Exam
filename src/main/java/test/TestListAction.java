@@ -28,10 +28,7 @@ public class TestListAction extends Action {
 		List<Subject> subjects = sub.search(keyword);
 		
 		
-		String message = (String) req.getAttribute("message");
-		if (message != null) {
-			req.setAttribute("message", message);
-		}
+		
 		
 		req.setAttribute("classlist", classlist);
 		req.setAttribute("subjects", subjects);

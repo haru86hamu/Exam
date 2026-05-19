@@ -61,6 +61,8 @@ public class TestListSubjectDAO extends DAO {
 
 		tests.addAll(testMap.values());
 		con.close();
+		
+		
 
 		return tests;
 	}

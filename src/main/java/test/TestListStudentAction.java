@@ -31,10 +31,11 @@ public class TestListStudentAction extends Action {
 		List<Subject> subjects = sub.search(keyword);
 		List<TestListStudent> stlist = teststdao.selectstudent(keyword,no);
 		
-		
-		String message = (String) req.getAttribute("message");
-		if (message != null) {
-			req.setAttribute("message", message);
+		if (stlist != null) {
+			String message = "成績が見つかりませんでした";
+			if (message != null) {
+				req.setAttribute("message", message);
+			}
 		}
 
 		req.setAttribute("no", no);

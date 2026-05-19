@@ -15,7 +15,7 @@
 
 <form class="search" method="get" action="StudentList.action">
 	<label for="year" class="lab">入学年度
-		<select name="year" id="year" class="label">
+		<select name="year" id="year" class="label" onchange="toggleYearRequired(); this.setCustomValidity('');" oninvalid="if (document.getElementById('classnum').value !== '') this.setCustomValidity('入学年度を選択してください');">
 			<option value="">--------</option>
 			<option value="2017" ${year == '2017' ? 'selected' : ''}>2017</option>
 			<option value="2018" ${year == '2018' ? 'selected' : ''}>2018</option>
@@ -31,7 +31,7 @@
 	</label>
 
 	<label for="classnum" class="lab">クラス
-		<select name="classnum" id="classnum" class="label">
+		<select name="classnum" id="classnum" class="label" onchange="toggleYearRequired()">
 			<option value="">-------</option>
 			<c:forEach var="c" items="${classlist}">
 				<option value="${c.classNum}" ${classnum == c.classNum ? 'selected' : ''}>${c.classNum}</option>
@@ -84,4 +84,19 @@
 	<c:otherwise>学生情報が取得できませんでした。</c:otherwise>
 </c:choose>
 
+
 <%@include file="../footer.jsp" %>
+
+
+<script>
+function toggleYearRequired() {
+	const year = document.getElementById("year");
+	const classnum = document.getElementById("classnum");
+	year.required = classnum.value !== "";
+	if (classnum.value === "") {
+		year.setCustomValidity("");
+	}
+}
+
+window.addEventListener("load", toggleYearRequired);
+</script>
